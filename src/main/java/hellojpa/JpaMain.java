@@ -17,7 +17,14 @@ public class JpaMain {
 
         try {
             List<Member> result = em.createQuery("select m from Member as m", Member.class)
-                            .getResultList();
+                    .setFirstResult(5)
+                    .setMaxResults(8)
+                    .getResultList();
+//            select
+//            member0_.id as id1_0_,
+//            member0_.name as name2_0_
+//        from
+//            Member member0_ limit ? offset ?
 
             for (Member member : result) {
                 System.out.println("member.name = " + member.getName());
