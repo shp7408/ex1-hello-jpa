@@ -17,7 +17,9 @@ public class JpaMain {
         try {
 
             Member findMember = em.find(Member.class, 1L);
-            em.remove(findMember);
+            findMember.setName("HelloJPA");
+
+//            em.persist(findMember); // -> 부분이 필요 없다. 자바의 Collection 을 다루는 것과 동일하므로
 
             tx.commit();
         } catch (Exception e) {
