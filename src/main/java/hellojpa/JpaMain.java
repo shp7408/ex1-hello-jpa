@@ -4,6 +4,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import java.util.List;
 
 public class JpaMain {
     public static void main(String[] args) {
@@ -15,11 +16,12 @@ public class JpaMain {
         tx.begin();
 
         try {
+            List<Member> result = em.createQuery("select m from Member as m", Member.class)
+                            .getResultList();
 
-            Member findMember = em.find(Member.class, 1L);
-            findMember.setName("HelloJPA");
-
-//            em.persist(findMember); // -> 부분이 필요 없다. 자바의 Collection 을 다루는 것과 동일하므로
+            for (Member member : result) {
+                System.out.println("member.name = " + member.getName());
+            }
 
             tx.commit();
         } catch (Exception e) {
