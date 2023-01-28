@@ -16,19 +16,12 @@ public class JpaMain {
         tx.begin();
 
         try {
-            List<Member> result = em.createQuery("select m from Member as m", Member.class)
-                    .setFirstResult(5)
-                    .setMaxResults(8)
-                    .getResultList();
-//            select
-//            member0_.id as id1_0_,
-//            member0_.name as name2_0_
-//        from
-//            Member member0_ limit ? offset ?
+            Member member = new Member();
+            member.setId(3L);
+            member.setUsername("C");
+            member.setRoleType(RoleType.GUEST);
 
-            for (Member member : result) {
-                System.out.println("member.name = " + member.getName());
-            }
+            em.persist(member);
 
             tx.commit();
         } catch (Exception e) {
